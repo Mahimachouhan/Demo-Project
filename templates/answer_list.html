@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class = "container">
+    <h1>see Answer ...</h1>
+            {{question.id}}
+            {{question}}
+<hr>
+       <table>
+        <thead>
+        <tr>
+            <td>Serial No</td>
+            <td>Answers</td>
+            <td></td>
+            <td>Upvote</td>
+            <td>UpVote Count</td>
+            <td>Down Vote</td>
+            <td>Downvote Count</td>
+        </tr>
+        </thead>
+
+        {% for answer in question.answer_set.all %}
+        <tr>
+            <td>{{answer.id}}</td>
+        <td>{{answer.content}} by {{answer.user.username}}</td>
+            <td></td>
+         <td>
+             <a href="{% url 'quora_app:upvote' answer.id %}?cb=Answer">Upvote</a>
+         </td>
+
+         <td>
+             {{answer.up_vote_count}}
+         </td>
+
+          <td>
+             <a href="{% url 'quora_app:downvote' answer.id %}?cb=Answer">downvote</a>
+          </td>
+
+         <td>
+             {{answer.down_vote_count}}
+         </td>
+        {% endfor %}
+        </tr>
+    </table>
+    <a href="{% url 'quora_app:add_answer' question.id %}" > add answer </a><br>
+    <a href="{% url 'quora_app:question_list' %}" > Back </a><br>
+    <a href="{% url 'quora_app:index' %}" > Back To index </a>
+</div>
+ {% endblock %}

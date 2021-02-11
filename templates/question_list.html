@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class = "container">
+   <div class="navbar-header">
+<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+<form role="search" class="navbar-form-custom" action=".">
+<div class="form-group">
+<input type="text" placeholder="Search for something..." class="form-control" name="search" id="searchbar" >
+</div>
+</form>
+</div>
+    <h1>Question List ...</h1>
+    <table>
+        <a href="{% url 'quora_app:add_question' %}" > add question </a><br>
+        <thead>
+        <tr>
+            <td>Serial No</td>
+            <td>Question</td>
+            <td>Answers</td>
+            <td>Upvote</td>
+            <td>UpVote Count</td>
+            <td>Down Vote</td>
+            <td>Downvote Count</td>
+        </tr>
+        </thead>
+    {% for q in questions %}
+        <tr>
+            <td>{{q.id}}</td>
+            <td>{{q.question}}</td>
+            <td>
+                <a href="{% url 'quora_app:answer_list' q.id%}">see answer</a>
+            </td>
+            <td>
+                <a href="{% url 'quora_app:upvote' q.id%}?cb=Question">Upvote</a>
+            </td>
+
+            <td>
+                {{ q.up_vote_count }}
+            </td>
+
+            <td>
+                <a href="{% url 'quora_app:downvote' q.id%}?cb=Question">Downvote</a>
+            </td>
+
+            <td>
+                {{ q.down_vote_count }}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+   <a href="{% url 'quora_app:index' %}" > Back To index </a><br>
+</div>
+ {% endblock %}

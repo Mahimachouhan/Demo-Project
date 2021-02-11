@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Home page ...</h1>
+<table>
+{% if request.user.is_anonymous %}
+<tr><td><a href="{% url 'account_signup' %}"> signup</a></td></tr>
+    {% endif %}
+<a href="{% url 'quora_app:add_question' %}" > add question </a><br>
+<a href="{% url 'quora_app:question_list' %}" > question list </a><br>
+<a href="{% url 'quora_app:topic' %}" > select topic </a><br>
+</table>
+{% endblock %}
